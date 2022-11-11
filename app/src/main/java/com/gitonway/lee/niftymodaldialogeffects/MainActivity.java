@@ -81,8 +81,8 @@ public class MainActivity extends Activity {
                 .withDividerColor("#6a1AA1E5")                              //线条颜色
                 .withMessage("这是小窗口内容")                     //内容
                 .withMessageColor("#FFFFFFFF")                              //里面内容的字体颜色
-              //  .withDialogColor("#A5CD4E")                               //窗口颜色
-                .withIcon(getResources().getDrawable(R.drawable.ic_launcher))   //窗口的icon(直接用withIcon(R.drawable.ic_launcher会出现异常))
+                //.withDialogColor("#1AA1E5")                               //窗口颜色
+               // .withIcon(getResources().getDrawable(R.drawable.ic_launcher))   //窗口的icon(直接用withIcon(R.drawable.ic_launcher会出现异常))
                 .isCancelableOnTouchOutside(true)                           //是否可点击窗口外边取消窗口
                 .withDuration(500)                                          //动画速度
                 .withEffect(effect)                                         //窗口类型

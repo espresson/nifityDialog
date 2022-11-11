@@ -26,13 +26,12 @@ https://github.com/android/platform_frameworks_base/blob/master/core/res/res/lay
                 android:paddingRight="@dimen/dialog_padding">
 
     <LinearLayout
-
         android:id="@+id/parentPanel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="#6a061E7B"
         android:clickable="false"
+        android:background="@drawable/bg_shape10_dialog"
         android:orientation="vertical"
         android:visibility="visible">
 
@@ -40,9 +39,9 @@ https://github.com/android/platform_frameworks_base/blob/master/core/res/res/lay
             android:id="@+id/topPanel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#22000000"
+            android:background="#fff"
             android:orientation="vertical">
-
+<!--            android:background="#22000000"-->
             <RelativeLayout
                 android:id="@+id/title_template"
                 android:layout_width="match_parent"
@@ -52,12 +51,12 @@ https://github.com/android/platform_frameworks_base/blob/master/core/res/res/lay
 
                 <ImageView
                     android:id="@+id/icon"
-                    android:layout_width="32dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
-                    android:layout_margin="8dip"
+                    android:layout_margin="5dip"
                     android:scaleType="centerInside"
-                    android:src="@null"/>
+                    android:src="@drawable/logo_bot"/>
 
                 <TextView
                     android:id="@+id/alertTitle"
@@ -107,6 +106,7 @@ https://github.com/android/platform_frameworks_base/blob/master/core/res/res/lay
             android:visibility="gone"></FrameLayout>
 
         <LinearLayout
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -116,6 +116,7 @@ https://github.com/android/platform_frameworks_base/blob/master/core/res/res/lay
                 android:id="@+id/button1"
                 style="@style/dialog_btn"
                 android:layout_margin="8dp"
+                android:background="@drawable/bg_shape_button"
                 android:text="OK"
                 android:visibility="gone"/>
 
