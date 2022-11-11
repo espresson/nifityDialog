@@ -78,12 +78,12 @@ public class MainActivity extends Activity {
         dialogBuilder
                 .withTitle("弹窗样式")                                  //窗口标题
                 .withTitleColor("#FFFFFF")                                  //窗口字体颜色
-                .withDividerColor("#631AA1E5")                              //线条颜色
-               // .withMessage("这是小窗口内容")                     //内容
+                .withDividerColor("#6a1AA1E5")                              //线条颜色
+                .withMessage("这是小窗口内容")                     //内容
                 .withMessageColor("#FFFFFFFF")                              //里面内容的字体颜色
-                .withDialogColor("#331AA1E5")                               //窗口颜色
-              //  .withIcon(getResources().getDrawable(R.drawable.ic_launcher))   //窗口的icon(直接用withIcon(R.drawable.ic_launcher会出现异常))
-                .isCancelableOnTouchOutside(false)                           //是否可点击窗口外边取消窗口
+              //  .withDialogColor("#A5CD4E")                               //窗口颜色
+                .withIcon(getResources().getDrawable(R.drawable.ic_launcher))   //窗口的icon(直接用withIcon(R.drawable.ic_launcher会出现异常))
+                .isCancelableOnTouchOutside(true)                           //是否可点击窗口外边取消窗口
                 .withDuration(500)                                          //动画速度
                 .withEffect(effect)                                         //窗口类型
                 .withButton1Text("知道了")                                      //两个button按钮
@@ -92,14 +92,14 @@ public class MainActivity extends Activity {
                 .setButton1Click(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                       // Toast.makeText(v.getContext(), "确定", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(v.getContext(), "确定", Toast.LENGTH_SHORT).show();
                         dialogBuilder.dismiss();
                     }
                 })
                 .setButton2Click(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                      //  Toast.makeText(v.getContext(), "取消", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(v.getContext(), "取消", Toast.LENGTH_SHORT).show();
                         dialogBuilder.dismiss();
                     }
                 }).show();
