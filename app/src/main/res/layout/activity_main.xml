@@ -1,0 +1,106 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#c8c8c8"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:background="#A7C0DC"
+        android:gravity="center"
+        android:padding="30dp"
+        android:textSize="20sp"
+        android:text="各式各样的弹窗效果"
+        android:textColor="#FFFFFF" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/fadein"
+                style="@style/my_btn"
+                android:text="浮现模式" />
+
+            <Button
+                android:id="@+id/slideright"
+                style="@style/my_btn"
+                android:text="右侧出现" />
+
+            <Button
+                android:id="@+id/slideleft"
+                style="@style/my_btn"
+                android:text="左侧出现" />
+
+            <Button
+                android:id="@+id/slidetop"
+                style="@style/my_btn"
+                android:text="顶部浮现" />
+
+            <Button
+                android:id="@+id/slideBottom"
+                style="@style/my_btn"
+                android:text="下方出现" />
+
+            <Button
+                android:id="@+id/newspager"
+                style="@style/my_btn"
+                android:text="飞式出现" />
+
+            <Button
+                android:id="@+id/fall"
+                style="@style/my_btn"
+                android:text="正面浮现" />
+
+            <Button
+                android:id="@+id/sidefall"
+                style="@style/my_btn"
+                android:text="切入式" />
+
+            <Button
+                android:id="@+id/shake"
+                style="@style/my_btn"
+                android:text="振动效果" />
+
+            <Button
+                android:id="@+id/fliph"
+                style="@style/my_btn"
+                android:text="3D水平式" />
+
+            <Button
+                android:id="@+id/flipv"
+                style="@style/my_btn"
+                android:text="3D纵向式" />
+
+            <Button
+                android:id="@+id/rotatebottom"
+                style="@style/my_btn"
+                android:text="3D下方切入" />
+
+            <Button
+                android:id="@+id/rotateleft"
+                style="@style/my_btn"
+                android:text="3D左侧切入" />
+
+            <Button
+                android:id="@+id/slit"
+                style="@style/my_btn"
+                android:text="3D翻转式" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
