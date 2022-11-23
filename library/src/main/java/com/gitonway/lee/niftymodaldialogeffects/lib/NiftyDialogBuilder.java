@@ -134,8 +134,8 @@ public class NiftyDialogBuilder extends Dialog implements DialogInterface, OnPag
 
         mDialogView = View.inflate(context, R.layout.dialog_layout, null);
         pdfView = (PDFView) mDialogView.findViewById(R.id.pdfView);
-        pdfView.setScaleX(2.5f);
-        pdfView.setScaleY(2.5f);
+//        pdfView.setScaleX(2.5f);
+//        pdfView.setScaleY(2.5f);
         mLinearLayoutView = (LinearLayout) mDialogView.findViewById(R.id.parentPanel);
         mRelativeLayoutView = (RelativeLayout) mDialogView.findViewById(R.id.main);
         mLinearLayoutTopView = (LinearLayout) mDialogView.findViewById(R.id.topPanel);
@@ -458,7 +458,10 @@ public class NiftyDialogBuilder extends Dialog implements DialogInterface, OnPag
     public void show() {
         super.show();
         //从assets目录读取pdf
-        displayFromAssets(assetFileName);
+        if(!assetFileName.equals("")){
+            displayFromAssets(assetFileName);
+        }
+
         //从文件中读取pdf
 //        displayFromFile( new File( "fileName"));
     }
