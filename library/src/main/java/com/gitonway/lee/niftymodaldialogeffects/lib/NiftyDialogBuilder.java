@@ -1,11 +1,15 @@
 package com.gitonway.lee.niftymodaldialogeffects.lib;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -15,13 +19,27 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.viewpager.widget.ViewPager;
 
 import com.gitonway.lee.niftymodaldialogeffects.lib.effects.BaseEffects;
+import com.gitonway.lee.niftymodaldialogeffects.lib.pdfview.PDFView;
+import com.gitonway.lee.niftymodaldialogeffects.lib.pdfview.listener.OnDrawListener;
+import com.gitonway.lee.niftymodaldialogeffects.lib.pdfview.listener.OnLoadCompleteListener;
+import com.gitonway.lee.niftymodaldialogeffects.lib.pdfview.listener.OnPageChangeListener;
+
+import java.io.File;
+
+import es.voghdev.pdfviewpager.library.PDFViewPager;
+import es.voghdev.pdfviewpager.library.adapter.BasePDFPagerAdapter;
+import es.voghdev.pdfviewpager.library.adapter.PDFPagerAdapter;
 
 /**
  * 自定义dialog
  */
-public class NiftyDialogBuilder extends Dialog implements DialogInterface {
+public class NiftyDialogBuilder extends Dialog implements DialogInterface, OnPageChangeListener
+        , OnLoadCompleteListener, OnDrawListener {
 
     private final String defTextColor = "#FFFFFFFF";//字体颜色
 
@@ -65,6 +83,8 @@ public class NiftyDialogBuilder extends Dialog implements DialogInterface {
 
     private boolean isCancelable = true;//是否可取消
 
+     PDFView pdfView;
+
     private static NiftyDialogBuilder instance;
 
     public NiftyDialogBuilder(Context context) {
@@ -105,15 +125,17 @@ public class NiftyDialogBuilder extends Dialog implements DialogInterface {
         return instance;
 
     }
-
     /**
      * 初始化控件
      * @param context
      */
+    @SuppressLint("NewApi")
     private void init(Context context) {
 
         mDialogView = View.inflate(context, R.layout.dialog_layout, null);
-
+        pdfView = (PDFView) mDialogView.findViewById(R.id.pdfView);
+        pdfView.setScaleX(2.5f);
+        pdfView.setScaleY(2.5f);
         mLinearLayoutView = (LinearLayout) mDialogView.findViewById(R.id.parentPanel);
         mRelativeLayoutView = (RelativeLayout) mDialogView.findViewById(R.id.main);
         mLinearLayoutTopView = (LinearLayout) mDialogView.findViewById(R.id.topPanel);
@@ -228,6 +250,17 @@ public class NiftyDialogBuilder extends Dialog implements DialogInterface {
      * @return
      */
     public NiftyDialogBuilder withMessage(CharSequence msg) {
+        toggleView(mLinearLayoutMsgView, msg);
+        mMessage.setText(msg);
+        return this;
+    }
+
+    /**
+     * 设置内容字体 CharSequence类型
+     * @param msg
+     * @return
+     */
+    public NiftyDialogBuilder withMessagepdf(CharSequence msg) {
         toggleView(mLinearLayoutMsgView, msg);
         mMessage.setText(msg);
         return this;
@@ -412,6 +445,11 @@ public class NiftyDialogBuilder extends Dialog implements DialogInterface {
             view.setVisibility(View.VISIBLE);
         }
     }
+  public static   String assetFileName="";
+
+    public static void setAssetFileName(String assetFileName) {
+        NiftyDialogBuilder.assetFileName = assetFileName;
+    }
 
     /**
      * 显示
@@ -419,6 +457,10 @@ public class NiftyDialogBuilder extends Dialog implements DialogInterface {
     @Override
     public void show() {
         super.show();
+        //从assets目录读取pdf
+        displayFromAssets(assetFileName);
+        //从文件中读取pdf
+//        displayFromFile( new File( "fileName"));
     }
 
     /**
@@ -441,5 +483,60 @@ public class NiftyDialogBuilder extends Dialog implements DialogInterface {
         super.dismiss();
         mButton1.setVisibility(View.GONE);
         mButton2.setVisibility(View.GONE);
+    }
+
+
+    private void displayFromAssets(String assetFileName) {
+        pdfView.fromAsset(assetFileName)   //设置pdf文件地址
+                .defaultPage(1)         //设置默认显示第1页
+                .onPageChange(this)     //设置翻页监听
+                .onLoad(this)           //设置加载监听
+                .onDraw(this)            //绘图监听
+                .showMinimap(false)     //pdf放大的时候，是否在屏幕的右上角生成小地图
+                .swipeVertical(true)  //pdf文档翻页是否是垂直翻页，默认是左右滑动翻页
+                .enableSwipe(true)   //是否允许翻页，默认是允许翻页
+//                 .pages()  //把 5 过滤掉
+                .load();
+    }
+
+    private void displayFromFile(File file) {
+        pdfView.fromFile(file)   //设置pdf文件地址
+                .defaultPage(6)         //设置默认显示第1页
+                .onPageChange(this)     //设置翻页监听
+                .onLoad(this)           //设置加载监听
+                .onDraw(this)            //绘图监听
+                .showMinimap(false)     //pdf放大的时候，是否在屏幕的右上角生成小地图
+                .swipeVertical(false)  //pdf文档翻页是否是垂直翻页，默认是左右滑动翻页
+                .enableSwipe(true)   //是否允许翻页，默认是允许翻
+                // .pages( 2 ，5  )  //把2  5 过滤掉
+                .load();
+    }
+
+    /**
+     * 翻页回调
+     *
+     * @param page
+     * @param pageCount
+     */
+    @Override
+    public void onPageChanged(int page, int pageCount) {
+//        Toast.makeText(getContext(), "page= " + page +
+//                " pageCount= " + pageCount, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 加载完成回调
+     *
+     * @param nbPages 总共的页数
+     */
+    @Override
+    public void loadComplete(int nbPages) {
+        //Toast.makeText(getContext(), "加载完成" + nbPages, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onLayerDrawn(Canvas canvas, float pageWidth, float pageHeight, int displayedPage) {
+        // Toast.makeText( MainActivity.this ,  "pageWidth= " + pageWidth + "
+        // pageHeight= " + pageHeight + " displayedPage="  + displayedPage , Toast.LENGTH_SHORT).show();
     }
 }

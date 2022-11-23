@@ -18,7 +18,8 @@
 https://github.com/android/platform_frameworks_base/blob/master/core/res/res/layout/alert_dialog_holo.xml
 
 -->
-<RelativeLayout android:id="@+id/main"
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -28,7 +29,7 @@ https://github.com/android/platform_frameworks_base/blob/master/core/res/res/lay
     <LinearLayout
         android:id="@+id/parentPanel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:clickable="false"
         android:background="@drawable/bg_shape10_dialog"
@@ -67,6 +68,7 @@ https://github.com/android/platform_frameworks_base/blob/master/core/res/res/lay
                     android:layout_marginLeft="8dip"
                     android:ellipsize="end"
                     android:gravity="center"
+                    android:textColor="#000"
                     android:singleLine="true"/>
             </RelativeLayout>
 
@@ -81,9 +83,21 @@ https://github.com/android/platform_frameworks_base/blob/master/core/res/res/lay
         <LinearLayout
             android:id="@+id/contentPanel"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
+
+
+<!--            <es.voghdev.pdfviewpager.library.PDFViewPager-->
+<!--                android:id="@+id/pdfViewPager"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="500dp"/>-->
+            <com.gitonway.lee.niftymodaldialogeffects.lib.pdfview.PDFView
+                android:visibility="gone"
+                android:id="@+id/pdfView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:ignore="MissingClass" />
 
             <TextView
                 android:id="@+id/message"
@@ -111,6 +125,7 @@ https://github.com/android/platform_frameworks_base/blob/master/core/res/res/lay
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp">
+
 
             <Button
                 android:id="@+id/button1"

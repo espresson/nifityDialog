@@ -13,7 +13,6 @@ public class MainActivity extends Activity {
 
     private Effectstype effect;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,12 +29,15 @@ public class MainActivity extends Activity {
         switch (v.getId()) {
             //根据每个窗口的类型展现不同的dialog 效果
             case R.id.fadein:
+                dialogBuilder.setAssetFileName("引体向上测试技巧.pdf");
                 effect = Effectstype.Fadein;
                 break;
             case R.id.slideright:
+                dialogBuilder.setAssetFileName("moby.pdf");
                 effect = Effectstype.Slideright;
                 break;
             case R.id.slideleft:
+                dialogBuilder.setAssetFileName("sample.pdf");
                 effect = Effectstype.Slideleft;
                 break;
             case R.id.slidetop:
@@ -76,10 +78,10 @@ public class MainActivity extends Activity {
          * 设置dialog样式
          */
         dialogBuilder
-                .withTitle("弹窗样式")                                  //窗口标题
-                .withTitleColor("#FFFFFF")                                  //窗口字体颜色
+                .withTitle("弹窗样式")                                       //窗口标题
+                .withTitleColor("#ff000000")                                //窗口字体颜色
                 .withDividerColor("#6a1AA1E5")                              //线条颜色
-                .withMessage("这是小窗口内容")                     //内容
+              .withMessage("这是小窗口内容")                                 //内容
                 .withMessageColor("#FFFFFFFF")                              //里面内容的字体颜色
                 //.withDialogColor("#1AA1E5")                               //窗口颜色
                // .withIcon(getResources().getDrawable(R.drawable.ic_launcher))   //窗口的icon(直接用withIcon(R.drawable.ic_launcher会出现异常))
@@ -88,7 +90,7 @@ public class MainActivity extends Activity {
                 .withEffect(effect)                                         //窗口类型
                 .withButton1Text("知道了")                                      //两个button按钮
               //  .withButton2Text("取消")
-                .setCustomView(R.layout.custom_view, v.getContext())         //窗口内容下面的layout
+               // .setCustomView(R.layout.custom_view, v.getContext())         //窗口内容下面的layout
                 .setButton1Click(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
