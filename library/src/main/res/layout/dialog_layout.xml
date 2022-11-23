@@ -109,7 +109,7 @@ https://github.com/android/platform_frameworks_base/blob/master/core/res/res/lay
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="24dp"
                 android:textColor="@color/msg_color"
-                android:textIsSelectable="true"/>
+               />
         </LinearLayout>
 
         <FrameLayout
