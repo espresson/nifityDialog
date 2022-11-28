@@ -173,6 +173,19 @@ public class NiftyDialogBuilder extends Dialog implements DialogInterface, OnPag
     }
 
     /**
+     * 设置PDf还是text
+      */
+    public void setPdfViewAndTextView(boolean flag){
+        if(flag){
+            pdfView.setVisibility(View.VISIBLE);
+            mMessage.setVisibility(View.GONE);
+        }else {
+            pdfView.setVisibility(View.GONE);
+            mMessage.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
      * 设置控件
      */
     public void toDefault() {
