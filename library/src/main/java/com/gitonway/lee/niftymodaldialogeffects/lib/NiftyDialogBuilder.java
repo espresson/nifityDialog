@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.SurfaceView;
@@ -28,6 +29,7 @@ import com.gitonway.lee.niftymodaldialogeffects.lib.pdfview.PDFView;
 import com.gitonway.lee.niftymodaldialogeffects.lib.pdfview.listener.OnDrawListener;
 import com.gitonway.lee.niftymodaldialogeffects.lib.pdfview.listener.OnLoadCompleteListener;
 import com.gitonway.lee.niftymodaldialogeffects.lib.pdfview.listener.OnPageChangeListener;
+import com.gitonway.lee.niftymodaldialogeffects.lib.pdfview.util.NavigationBarUtil;
 
 import java.io.File;
 
@@ -464,12 +466,32 @@ public class NiftyDialogBuilder extends Dialog implements DialogInterface, OnPag
         NiftyDialogBuilder.assetFileName = assetFileName;
     }
 
+
+
+    private void fullScreenImmersive(View view) {
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN;
+            view.setSystemUiVisibility(uiOptions);
+        }
+    }
+
     /**
      * 显示
      */
     @Override
     public void show() {
+        NavigationBarUtil.focusNotAle(getWindow());
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
         super.show();
+        NavigationBarUtil.hideNavigationBar(getWindow());
+        NavigationBarUtil.clearFocusNotAle(getWindow());
+        fullScreenImmersive(getWindow().getDecorView());
+        this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
         //从assets目录读取pdf
         if(!assetFileName.equals("")){
             displayFromAssets(assetFileName);

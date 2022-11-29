@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
      */
     public void dialogShow(View v) {
         final NiftyDialogBuilder dialogBuilder = NiftyDialogBuilder.getInstance(this);
-
+        dialogBuilder.setPdfViewAndTextView(true);
         switch (v.getId()) {
             //根据每个窗口的类型展现不同的dialog 效果
             case R.id.fadein:
