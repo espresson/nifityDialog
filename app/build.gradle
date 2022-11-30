@@ -26,5 +26,5 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':library')
     //endregion
-    implementation project(':myView')
+
 }
